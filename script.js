@@ -4,6 +4,9 @@ const wrapper = document.querySelector(".wrapper"),
   inputField = inputPart.querySelector("input"),
   locationBtn = inputPart.querySelector("button");
 
+
+let api;
+
 inputField.addEventListener("keyup", (e) => {
   // this condition get executed if user pressed enter btn & input value is non-empty
   if (e.key == "Enter" && inputField.value != "") {
@@ -13,7 +16,7 @@ inputField.addEventListener("keyup", (e) => {
 
 
 
-locationBtn.addEventListener("Click", () => {
+locationBtn.addEventListener("click", () => {
     if (navigator.geolocation){
         // if browser support geolocaion api
         // on succesful getCurrentPosition method onSuccess function is called otherwise onError is called 
@@ -25,7 +28,10 @@ locationBtn.addEventListener("Click", () => {
 
 // onSuccess Function 
 function onSuccess(position){
-    console.log(position);
+  // Getting latitude & longitude of the user device from coorfinates 
+    const {latitude, longitude} = position.coords;
+    api = `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=aae5870fda4696f1f0b23a908e31c3de`;
+    fetchData();
 }
 // onError Function 
 function onError(error){
@@ -40,7 +46,11 @@ function onError(error){
 
 
 function requestApi(city) {
-  let api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=aae5870fda4696f1f0b23a908e31c3de`;
+  api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=aae5870fda4696f1f0b23a908e31c3de`;
+  fetchData();
+}
+
+function fetchData(){
   infoTxt.innerText = " Getting Weather Details......";
   infoTxt.classList.add("pending");
     // getting api response and returning it with parsing into js obj and in another
