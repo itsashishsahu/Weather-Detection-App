@@ -30,7 +30,7 @@ locationBtn.addEventListener("click", () => {
 function onSuccess(position){
   // Getting latitude & longitude of the user device from coorfinates 
     const {latitude, longitude} = position.coords;
-    api = `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=aae5870fda4696f1f0b23a908e31c3de`;
+    api = `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=mteric&appid=aae5870fda4696f1f0b23a908e31c3de`;
     fetchData();
 }
 // onError Function 
@@ -59,5 +59,28 @@ function fetchData(){
 }
 
 function weatherDetails(info){
+  if(info.cod == "404"){
+    infoTxt.classList.replace("pending", "error");
+    infoTxt.innerText = `${inputField.value} isn't a valid city name`;
+  }else{
+    // get required properties value from the info Object
+
+    const city = info.name;
+    const country = info.sys.country;
+    const {description, id} = info.weather[0];
+    const {feels_like, humidity, temp} = info.main;
+    
+
+    // pass these values to a particular html element 
+    wrapper.querySelector(".temp .numb").innerText = temp;
+    wrapper.querySelector(".weather").innerText = description;
+    wrapper.querySelector(".location span").innerText = `${city}, ${country}`;
+    wrapper.querySelector(".temp .numb-2").innerText = feels_like;
+    wrapper.querySelector(".humidity span").innerText = `${humidity}%`;
+
+    infoTxt.classList.remove("pending", "error");
+    wrapper.classList.add("active");
     console.log(info);
+  }
 }
+
