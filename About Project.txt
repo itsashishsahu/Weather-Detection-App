@@ -1,0 +1,26 @@
+Hello, guy's this is Ashish Sahu (itsashishsahu.com). I have made this awesome 
+JavaScript Project using Following tech stack:
+1. javaScript
+2. HTML
+3. CSS
+
+The resources i have used here are mentioned below:
+
+1. Project Reference : CodingNepal (YouTube & Website).
+2. RealTime Weather API: OpenWeather
+3. CSS Icons : https://unpkg.com
+
+
+Problems Faced :
+1. Got error in integrating openweather API as I am newbie
+(Truely i have used API first time).
+
+2. made error while defining function and class name.
+
+3. CSS error.
+
+Learning :
+
+1. How JavaScript Works??
+2. How API's are integrated??
+3. How to fetch Data from API's??
